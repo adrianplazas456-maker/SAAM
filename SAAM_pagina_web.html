@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S.A.A.M. — Un puente entre el mundo y cada hogar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --navy-950:#0a1830;
+    --navy-900:#0f2140;
+    --navy-800:#16305a;
+    --blue-500:#2f8fd1;
+    --blue-300:#8ec9ec;
+    --teal-400:#3fb9b0;
+    --brass-500:#c9a227;
+    --brass-300:#e4c565;
+    --paper-0:#f4f6f8;
+    --paper-50:#eef1f4;
+    --ink-900:#0d1524;
+    --ink-600:#41506b;
+    --line:#d8dee6;
+    --radius-sm:6px;
+    --radius-md:12px;
+    --maxw:1180px;
+    --display: 'Fraunces', Georgia, serif;
+    --body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'IBM Plex Mono', 'Courier New', monospace;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper-0);
+    color:var(--ink-900);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--brass-500);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:1px;
+    background:var(--brass-500);
+    display:inline-block;
+  }
+
+  h1,h2,h3{font-family:var(--display); font-weight:600; margin:0; color:var(--navy-950);}
+  h2{font-size:clamp(28px,3.4vw,40px); letter-spacing:-0.01em;}
+  h3{font-size:20px; letter-spacing:-0.01em;}
+  p{margin:0;}
+
+  .section{padding:88px 0;}
+  .section-head{max-width:640px; margin-bottom:48px;}
+  .section-head h2{margin-top:14px;}
+  .section-head p{margin-top:16px; color:var(--ink-600); font-size:17px;}
+
+  /* ============ FOCUS / A11Y ============ */
+  a:focus-visible, button:focus-visible{
+    outline:3px solid var(--brass-500);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  /* ============ HEADER ============ */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(10,24,48,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .nav{
+    max-width:var(--maxw); margin:0 auto; padding:0 32px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:68px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:var(--mono); font-weight:600; letter-spacing:.06em;
+    color:#fff; font-size:15px; text-decoration:none;
+  }
+  .brand .mark{
+    width:30px;height:30px; border:1.5px solid var(--brass-300); border-radius:3px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--display); font-size:14px; color:var(--brass-300);
+  }
+  nav ul{list-style:none; display:flex; gap:28px; margin:0; padding:0;}
+  nav ul a{
+    color:rgba(255,255,255,0.75); text-decoration:none; font-size:14px;
+    font-weight:500; transition:color .2s ease;
+  }
+  nav ul a:hover{color:#fff;}
+  .nav-toggle{display:none;}
+
+  @media (max-width:860px){
+    nav ul{display:none;}
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    background:
+      radial-gradient(ellipse 700px 480px at 82% -10%, rgba(63,185,176,0.28), transparent 60%),
+      radial-gradient(ellipse 520px 400px at 100% 100%, rgba(47,143,209,0.22), transparent 65%),
+      linear-gradient(180deg, var(--navy-950), var(--navy-900) 60%, var(--navy-800));
+    color:#fff;
+    padding:96px 0 0;
+    overflow:hidden;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center;
+  }
+  .hero-eyebrow{color:var(--brass-300);}
+  .hero-eyebrow::before{background:var(--brass-300);}
+  .hero h1{
+    color:#fff;
+    font-size:clamp(38px,5.4vw,64px);
+    line-height:1.05;
+    margin-top:18px;
+    letter-spacing:-0.015em;
+  }
+  .hero h1 em{
+    font-style:italic; color:var(--teal-400);
+  }
+  .hero-sub{
+    margin-top:22px; max-width:480px;
+    color:rgba(255,255,255,0.72); font-size:17.5px;
+  }
+  .hero-cta{display:flex; gap:14px; margin-top:36px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--body); font-weight:600; font-size:14.5px;
+    padding:13px 24px; border-radius:999px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+    border:1px solid transparent; cursor:pointer;
+  }
+  .btn-primary{background:var(--brass-500); color:var(--navy-950);}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 24px -8px rgba(201,162,39,0.6);}
+  .btn-ghost{border-color:rgba(255,255,255,0.3); color:#fff;}
+  .btn-ghost:hover{background:rgba(255,255,255,0.08); transform:translateY(-2px);}
+
+  /* stamp */
+  .stamp-wrap{position:relative; display:flex; justify-content:center; align-items:center; min-height:340px;}
+  .stamp{
+    width:238px; height:238px; border-radius:50%;
+    border:2.5px dashed var(--brass-300);
+    display:flex; align-items:center; justify-content:center;
+    transform:rotate(-9deg);
+    position:relative;
+    animation:stamp-float 7s ease-in-out infinite;
+  }
+  @keyframes stamp-float{
+    0%,100%{transform:rotate(-9deg) translateY(0);}
+    50%{transform:rotate(-9deg) translateY(-10px);}
+  }
+  .stamp-inner{
+    width:196px; height:196px; border-radius:50%;
+    border:1.5px solid var(--brass-300);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; color:var(--brass-300);
+    font-family:var(--mono);
+  }
+  .stamp-inner .big{font-family:var(--display); font-size:30px; color:#fff; letter-spacing:.04em; margin-bottom:4px;}
+  .stamp-inner .small{font-size:10px; letter-spacing:.18em;}
+  .stamp-inner .line{width:70px; height:1px; background:var(--brass-300); margin:8px 0;}
+
+  .route{
+    position:absolute; inset:0; pointer-events:none;
+  }
+
+  /* ticker */
+  .ticker{
+    margin-top:70px; border-top:1px solid rgba(255,255,255,0.12);
+    overflow:hidden; white-space:nowrap; position:relative;
+  }
+  .ticker-track{
+    display:inline-flex; gap:48px; padding:16px 0;
+    animation:scroll-left 26s linear infinite;
+    font-family:var(--mono); font-size:13px; letter-spacing:.12em;
+    color:rgba(255,255,255,0.55);
+  }
+  .ticker-track span{display:flex; align-items:center; gap:10px;}
+  .ticker-track span::before{content:"◆"; color:var(--teal-400); font-size:8px;}
+  @keyframes scroll-left{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+
+  /* ============ MISSION / VISION / VALUES ============ */
+  .card-row{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .stamp-card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius-md);
+    padding:30px 26px; position:relative; overflow:hidden;
+  }
+  .stamp-card::before{
+    content:attr(data-tag);
+    position:absolute; top:16px; right:18px;
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.12em;
+    color:var(--blue-500); border:1px solid var(--blue-300); border-radius:999px;
+    padding:3px 10px;
+  }
+  .stamp-card h3{margin-top:6px; margin-bottom:14px; color:var(--navy-900);}
+  .stamp-card p{color:var(--ink-600); font-size:15px;}
+
+  /* ============ INFO BAR (tipo de empresa) ============ */
+  .infobar{
+    background:var(--navy-900); color:#fff; border-radius:var(--radius-md);
+    padding:26px 32px; display:flex; gap:40px; flex-wrap:wrap; align-items:center;
+  }
+  .infobar .item{display:flex; flex-direction:column; gap:4px;}
+  .infobar .item .k{font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--teal-400); text-transform:uppercase;}
+  .infobar .item .v{font-family:var(--display); font-size:19px;}
+
+  /* ============ PROBLEMA (two-col) ============ */
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:48px;}
+  .split .block{border-left:2px solid var(--brass-500); padding-left:24px;}
+  .split .block h3{color:var(--navy-900); margin-bottom:10px;}
+  .split .block p{color:var(--ink-600); font-size:15.5px;}
+
+  /* ============ OBJETIVOS ============ */
+  .obj-quote{
+    background:linear-gradient(135deg, var(--navy-900), var(--navy-800));
+    color:#fff; border-radius:var(--radius-md); padding:44px 40px;
+    margin-bottom:32px; position:relative;
+  }
+  .obj-quote .eyebrow{color:var(--teal-400); margin-bottom:16px;}
+  .obj-quote .eyebrow::before{background:var(--teal-400);}
+  .obj-quote p{font-family:var(--display); font-size:clamp(20px,2.4vw,26px); line-height:1.45;}
+  .obj-list{list-style:none; padding:0; margin:0; display:grid; gap:16px;}
+  .obj-list li{
+    display:flex; gap:16px; align-items:flex-start;
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius-sm);
+    padding:18px 20px;
+  }
+  .obj-list .num{
+    font-family:var(--mono); color:var(--brass-500); font-weight:600; font-size:14px;
+    border:1px solid var(--brass-300); border-radius:50%;
+    width:26px; height:26px; flex:none; display:flex; align-items:center; justify-content:center;
+  }
+  .obj-list p{color:var(--ink-900); font-size:15.5px;}
+
+  /* ============ PROPUESTA ============ */
+  .propuesta-grid{display:grid; grid-template-columns:1.1fr 1fr; gap:56px; align-items:start;}
+  .propuesta-text p{color:var(--ink-600); font-size:16px; margin-bottom:16px;}
+  .propuesta-text .lead{font-family:var(--display); font-size:20px; color:var(--navy-950); margin-bottom:18px;}
+  .passport-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .passport{
+    border:1px solid var(--line); border-radius:var(--radius-sm); padding:18px;
+    background:var(--paper-50);
+  }
+  .passport .k{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; color:var(--blue-500); text-transform:uppercase; margin-bottom:8px; display:block;}
+  .passport .v{font-size:14px; color:var(--ink-900); line-height:1.5;}
+
+  /* ============ TIMELINE (plan de ejecución) ============ */
+  .timeline{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; margin-top:12px;
+  }
+  .timeline::before{
+    content:""; position:absolute; top:19px; left:5%; right:5%; height:2px;
+    background:repeating-linear-gradient(90deg, var(--brass-300) 0 8px, transparent 8px 16px);
+  }
+  .tl-item{position:relative; padding-top:52px; padding-right:18px;}
+  .tl-dot{
+    position:absolute; top:0; left:0; width:40px; height:40px; border-radius:50%;
+    background:var(--navy-900); color:var(--brass-300); font-family:var(--mono); font-size:13px; font-weight:600;
+    display:flex; align-items:center; justify-content:center; border:2px solid var(--brass-500);
+  }
+  .tl-item h3{font-size:15px; font-family:var(--mono); letter-spacing:.04em; color:var(--navy-900); text-transform:uppercase; margin-bottom:8px;}
+  .tl-item p{color:var(--ink-600); font-size:14.5px;}
+  .phase-cards{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:56px;}
+  .phase-card{border:1px solid var(--line); border-radius:var(--radius-md); padding:26px 28px; background:#fff;}
+  .phase-card .eyebrow{margin-bottom:12px;}
+  .phase-card ul{margin:0; padding-left:18px; color:var(--ink-600); font-size:15px; display:grid; gap:8px;}
+
+  @media (max-width:760px){
+    .timeline{grid-template-columns:1fr 1fr; row-gap:36px;}
+    .timeline::before{display:none;}
+  }
+
+  /* ============ FUNCIONAMIENTO / FLOW DIAGRAM ============ */
+  .flow-section{background:var(--navy-950); color:#fff;}
+  .flow-section .section-head p{color:rgba(255,255,255,0.65);}
+  .flow-section .eyebrow{color:var(--teal-400);}
+  .flow-section .eyebrow::before{background:var(--teal-400);}
+  .flow-section h2{color:#fff;}
+
+  .flow{
+    display:grid; grid-template-columns:1fr 1fr; gap:16px 60px; margin-top:20px;
+  }
+  .flow-col{display:grid; gap:16px; position:relative;}
+  .flow-col::before{
+    content:""; position:absolute; top:24px; bottom:24px; left:24px; width:1px;
+    background:repeating-linear-gradient(180deg, rgba(255,255,255,0.25) 0 6px, transparent 6px 12px);
+    z-index:0;
+  }
+  .flow-node{
+    position:relative; z-index:1; margin-left:50px;
+    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.14);
+    border-radius:var(--radius-sm); padding:14px 18px;
+  }
+  .flow-node::before{
+    content:attr(data-i); position:absolute; left:-50px; top:50%; transform:translateY(-50%);
+    width:32px; height:32px; border-radius:50%; background:var(--teal-400); color:var(--navy-950);
+    font-family:var(--mono); font-weight:700; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .flow-node.brass::before{background:var(--brass-500);}
+  .flow-node h3{color:#fff; font-size:15.5px; margin-bottom:4px;}
+  .flow-node p{color:rgba(255,255,255,0.55); font-size:13.5px;}
+  .flow-caption{
+    margin-top:36px; font-family:var(--mono); font-size:12.5px; color:rgba(255,255,255,0.45);
+    text-align:center;
+  }
+  .tools-row{
+    margin-top:44px; display:flex; flex-wrap:wrap; gap:10px;
+  }
+  .tool-chip{
+    font-family:var(--mono); font-size:12.5px; color:var(--teal-400);
+    border:1px solid rgba(63,185,176,0.4); border-radius:999px; padding:7px 14px;
+  }
+
+  @media (max-width:760px){
+    .flow{grid-template-columns:1fr;}
+  }
+
+  /* ============ BENEFICIOS ============ */
+  .benef-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .benef-card{padding:30px 0; border-top:2px solid var(--navy-900);}
+  .benef-card .eyebrow{margin-bottom:14px;}
+  .benef-card p{color:var(--ink-600); font-size:15px;}
+
+  /* ============ VIABILIDAD ============ */
+  .via-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:start;}
+  .big-figure{
+    font-family:var(--display); font-size:clamp(40px,5vw,58px); color:var(--navy-950);
+    line-height:1;
+  }
+  .big-figure sup{font-size:22px; color:var(--brass-500); font-family:var(--mono); margin-left:6px;}
+  .via-note{margin-top:18px; color:var(--ink-600); font-size:15px; max-width:340px;}
+  .fund-list{list-style:none; margin:0; padding:0; display:grid; gap:0;}
+  .fund-list li{
+    display:flex; gap:16px; padding:16px 0; border-bottom:1px solid var(--line); font-size:15px; color:var(--ink-900);
+  }
+  .fund-list li span.tag{
+    font-family:var(--mono); font-size:11px; color:var(--blue-500); flex:none; padding-top:2px;
+  }
+
+  /* ============ RESULTADOS / ANTES-DESPUES ============ */
+  .compare{display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--line); border-radius:var(--radius-md); overflow:hidden;}
+  .compare .col{padding:32px;}
+  .compare .before{background:var(--paper-50);}
+  .compare .after{background:var(--navy-950); color:#fff;}
+  .compare .label{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; margin-bottom:14px; display:block;}
+  .compare .before .label{color:var(--ink-600);}
+  .compare .after .label{color:var(--teal-400);}
+  .compare p{font-size:15px; line-height:1.65;}
+  .compare .before p{color:var(--ink-600);}
+  .compare .after p{color:rgba(255,255,255,0.75);}
+
+  @media (max-width:760px){
+    .compare{grid-template-columns:1fr;}
+  }
+
+  /* ============ CONCLUSION / CTA ============ */
+  .cta-final{
+    background:linear-gradient(135deg,var(--navy-900),var(--navy-950));
+    color:#fff; border-radius:var(--radius-md); padding:56px 48px; text-align:center;
+    position:relative; overflow:hidden;
+  }
+  .cta-final h2{color:#fff; max-width:640px; margin:14px auto 0;}
+  .cta-final p{color:rgba(255,255,255,0.65); max-width:520px; margin:18px auto 0;}
+  .cta-final .hero-cta{justify-content:center; margin-top:30px;}
+
+  /* ============ FOOTER ============ */
+  footer{background:var(--navy-950); color:rgba(255,255,255,0.6); padding:56px 0 28px;}
+  .footer-grid{display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:40px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.1);}
+  footer h3{color:#fff; font-size:15px; font-family:var(--mono); letter-spacing:.08em; text-transform:uppercase; margin-bottom:16px;}
+  footer .brand-line{display:flex; align-items:center; gap:10px; color:#fff; font-family:var(--mono); font-weight:600; letter-spacing:.06em; margin-bottom:14px;}
+  footer p{font-size:14.5px; line-height:1.7; max-width:320px;}
+  footer ul{list-style:none; padding:0; margin:0; display:grid; gap:10px; font-size:14.5px;}
+  .bottom-row{display:flex; justify-content:space-between; padding-top:24px; font-size:13px; flex-wrap:wrap; gap:10px;}
+
+  /* reveal on scroll — progressive enhancement: only animates once JS adds .js-reveal */
+  .js-reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease;}
+  .js-reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .stamp-wrap{min-height:220px; margin-top:20px;}
+    .card-row{grid-template-columns:1fr;}
+    .split{grid-template-columns:1fr;}
+    .propuesta-grid{grid-template-columns:1fr;}
+    .via-grid{grid-template-columns:1fr;}
+    .benef-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+    .phase-cards{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="brand" href="#top"><span class="mark">S</span>S.A.A.M.</a>
+    <nav>
+      <ul>
+        <li><a href="#empresa">Empresa</a></li>
+        <li><a href="#propuesta">Propuesta</a></li>
+        <li><a href="#ejecucion">Ejecución</a></li>
+        <li><a href="#funcionamiento">Funcionamiento</a></li>
+        <li><a href="#viabilidad">Viabilidad</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow hero-eyebrow">Sector comercial · Importación y distribución</p>
+        <h1>Un puente entre<br>el mundo y <em>cada hogar.</em></h1>
+        <p class="hero-sub">S.A.A.M. importa y distribuye moda, calzado, cosméticos y accesorios originales, conectando marcas internacionales con consumidores colombianos a través de un modelo híbrido de tienda física y canal digital.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#propuesta">Ver la propuesta</a>
+          <a class="btn btn-ghost" href="#viabilidad">Estudio de viabilidad</a>
+        </div>
+      </div>
+      <div class="stamp-wrap">
+        <div class="stamp">
+          <div class="stamp-inner">
+            <span class="small">SOCIEDAD DE</span>
+            <span class="big">S.A.A.M.</span>
+            <span class="line"></span>
+            <span class="small">IMPORTER · EST. 2030</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>MODA</span><span>CALZADO</span><span>COSMÉTICOS</span><span>ACCESORIOS</span>
+        <span>PROVEEDORES INTERNACIONALES</span><span>GESTIÓN ADUANERA</span><span>E-COMMERCE</span>
+        <span>MODA</span><span>CALZADO</span><span>COSMÉTICOS</span><span>ACCESORIOS</span>
+        <span>PROVEEDORES INTERNACIONALES</span><span>GESTIÓN ADUANERA</span><span>E-COMMERCE</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EMPRESA ================= -->
+  <section class="section" id="empresa">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Presentación de la empresa</p>
+        <h2>Nacida en un aula, pensada para el mercado real</h2>
+        <p>La iniciativa surge del plan diseñado por Carlos Andrés Ochoa Camargo, Adrián Felipe González Plazas, María Del Mar Hernández Cardozo y Stefany Plata Barrera, bajo la orientación de la docente Johana Higuera Landaeta. S.A.A.M. es una empresa colombiana emergente del sector comercial, dedicada a la importación y distribución al por mayor de productos internacionales.</p>
+      </div>
+
+      <div class="card-row reveal">
+        <div class="stamp-card" data-tag="Misión">
+          <h3>Conectar culturas y tendencias</h3>
+          <p>Ofrecer productos internacionales de alta calidad, con una experiencia de compra confiable, moderna y accesible, garantizando excelencia en el servicio, innovación constante y responsabilidad social.</p>
+        </div>
+        <div class="stamp-card" data-tag="Visión 2030">
+          <h3>Liderazgo en Latinoamérica</h3>
+          <p>Ser reconocidos como una de las empresas líderes en la distribución y comercialización de productos internacionales, destacándonos por variedad, calidad y compromiso con el cliente.</p>
+        </div>
+        <div class="stamp-card" data-tag="Valores">
+          <h3>Autenticidad y confianza</h3>
+          <p>Calidad y autenticidad en cada producto, transparencia con clientes y proveedores, innovación constante y responsabilidad social y ambiental en cada proceso.</p>
+        </div>
+      </div>
+
+      <div class="infobar reveal" style="margin-top:32px;">
+        <div class="item">
+          <span class="k">Tipo de empresa</span>
+          <span class="v">Ficticia · fines académicos</span>
+        </div>
+        <div class="item">
+          <span class="k">Sector</span>
+          <span class="v">Comercial / comercio</span>
+        </div>
+        <div class="item">
+          <span class="k">Estructura</span>
+          <span class="v">4 socios fundadores</span>
+        </div>
+        <div class="item">
+          <span class="k">Ciudad base</span>
+          <span class="v">Colombia</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTEXTO / PROBLEMA ================= -->
+  <section class="section" style="background:var(--paper-50);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Contexto del proyecto</p>
+        <h2>El problema que S.A.A.M. resuelve</h2>
+      </div>
+      <div class="split reveal">
+        <div class="block">
+          <h3>La necesidad detectada</h3>
+          <p>Existe una creciente demanda de productos internacionales de moda, calzado, cosméticos y accesorios por parte de los consumidores colombianos. Sin embargo, la oferta local limitada, las imitaciones y los altos costos de importación individual dificultan el acceso a productos originales y de calidad.</p>
+        </div>
+        <div class="block">
+          <h3>Relación con el sector económico</h3>
+          <p>El proyecto pertenece al sector terciario o comercial, en el área de importación, distribución y comercialización de productos internacionales, contribuyendo a la generación de empleo y al fortalecimiento de las cadenas de suministro entre proveedores internacionales y consumidores locales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= OBJETIVOS ================= -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Objetivos</p>
+        <h2>Qué buscamos lograr</h2>
+      </div>
+      <div class="reveal">
+        <div class="obj-quote">
+          <p class="eyebrow">Objetivo general</p>
+          <p>“Posicionar a S.A.A.M. como una empresa líder en la distribución y comercialización de productos internacionales de alta calidad, garantizando la satisfacción de los clientes mediante innovación, servicio confiable y precios competitivos.”</p>
+        </div>
+        <ul class="obj-list">
+          <li>
+            <span class="num">1</span>
+            <p>Ampliar la oferta de productos internacionales de ropa, calzado, cosméticos y accesorios, adaptándolos a las tendencias del mercado y a las necesidades de los clientes.</p>
+          </li>
+          <li>
+            <span class="num">2</span>
+            <p>Implementar estrategias de marketing digital y físico que fortalezcan la presencia de S.A.A.M. en el mercado nacional e internacional.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROPUESTA ================= -->
+  <section class="section" id="propuesta" style="background:var(--paper-50);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Propuesta del proyecto</p>
+        <h2>Producto, valor agregado y público objetivo</h2>
+      </div>
+      <div class="propuesta-grid reveal">
+        <div class="propuesta-text">
+          <p class="lead">Importación, distribución y comercialización de ropa, calzado, cosméticos y accesorios internacionales.</p>
+          <p>El modelo de negocio combina la venta física y digital para ofrecer productos originales, de calidad garantizada y alineados con las últimas tendencias globales, en una experiencia de compra moderna, segura y accesible.</p>
+          <p><strong>Valor agregado:</strong> modelo híbrido Click and Mortar con gestión omnicanal de inventario, que asegura disponibilidad, trazabilidad y garantía de autenticidad frente a la oferta informal del mercado.</p>
+        </div>
+        <div class="passport-grid">
+          <div class="passport">
+            <span class="k">Demografía</span>
+            <span class="v">Hombres y mujeres de 18 a 45 años.</span>
+          </div>
+          <div class="passport">
+            <span class="k">Ubicación</span>
+            <span class="v">Zonas urbanas: Bogotá, Medellín, Cali, Barranquilla.</span>
+          </div>
+          <div class="passport">
+            <span class="k">Perfil psicográfico</span>
+            <span class="v">Apasionados por la moda, tendencias globales y estilo de vida moderno.</span>
+          </div>
+          <div class="passport">
+            <span class="k">Perfil conductual</span>
+            <span class="v">Compradores frecuentes por e-commerce que valoran exclusividad y seguridad.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PLAN DE EJECUCIÓN ================= -->
+  <section class="section" id="ejecucion">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Plan de ejecución</p>
+        <h2>Seis semanas, dos fases</h2>
+        <p>El cronograma inicial concentra la puesta en marcha operativa y la primera importación en un horizonte de seis semanas.</p>
+      </div>
+
+      <div class="timeline reveal">
+        <div class="tl-item">
+          <div class="tl-dot">S1</div>
+          <h3>Inicio</h3>
+          <p>Registro legal y constitución formal de la empresa.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">S2</div>
+          <h3>Infraestructura</h3>
+          <p>Desarrollo de la plataforma de e-commerce y adecuación del punto de venta.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">S4</div>
+          <h3>Alianzas</h3>
+          <p>Cierre de alianzas con proveedores internacionales y compra de inventario inicial.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot">S6</div>
+          <h3>Puesta en marcha</h3>
+          <p>Trámites aduaneros, recepción en bodega e inicio de la operación comercial.</p>
+        </div>
+      </div>
+
+      <div class="phase-cards reveal">
+        <div class="phase-card">
+          <p class="eyebrow">Fase 1 · Constitución</p>
+          <ul>
+            <li>Registro legal y constitución formal de la empresa.</li>
+            <li>Desarrollo y configuración de la plataforma de e-commerce y pasarelas de pago.</li>
+            <li>Selección y adecuación del punto de venta físico / bodega.</li>
+          </ul>
+        </div>
+        <div class="phase-card">
+          <p class="eyebrow">Fase 2 · Negociación e importación</p>
+          <ul>
+            <li>Búsqueda y cierre de alianzas con proveedores internacionales.</li>
+            <li>Adquisición del inventario inicial (ropa, calzado, cosméticos).</li>
+            <li>Trámites aduaneros y logística de transporte internacional.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FUNCIONAMIENTO ================= -->
+  <section class="section flow-section" id="funcionamiento">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Funcionamiento</p>
+        <h2>Del proveedor internacional a la puerta del cliente</h2>
+        <p>S.A.A.M. opera bajo un modelo híbrido (Click and Mortar), con gestión omnicanal de inventario entre tienda física y canales digitales.</p>
+      </div>
+
+      <div class="flow reveal">
+        <div class="flow-col">
+          <div class="flow-node" data-i="1">
+            <h3>Proveedores internacionales</h3>
+            <p>Origen de la mercancía importada.</p>
+          </div>
+          <div class="flow-node" data-i="2">
+            <h3>Gestión aduanera / DIAN</h3>
+            <p>Trámites de importación y nacionalización.</p>
+          </div>
+          <div class="flow-node" data-i="3">
+            <h3>Recepción en bodega central</h3>
+            <p>Ingreso y codificación en el sistema ERP.</p>
+          </div>
+          <div class="flow-node brass" data-i="4a">
+            <h3>Tienda física</h3>
+            <p>Venta presencial al cliente.</p>
+          </div>
+        </div>
+        <div class="flow-col">
+          <div class="flow-node brass" data-i="4b">
+            <h3>Tienda online / marketplaces</h3>
+            <p>Pasarela de pago (PayU / PayPal).</p>
+          </div>
+          <div class="flow-node" data-i="5">
+            <h3>Alistamiento (packing)</h3>
+            <p>Preparación del pedido para envío.</p>
+          </div>
+          <div class="flow-node" data-i="6">
+            <h3>Operador logístico</h3>
+            <p>Transporte hasta el cliente final.</p>
+          </div>
+          <div class="flow-node" data-i="7">
+            <h3>Servicio postventa / CRM</h3>
+            <p>Retroalimentación al sistema ERP y fidelización.</p>
+          </div>
+        </div>
+      </div>
+      <p class="flow-caption">Diagrama de flujo operativo — proceso comercial y logístico de S.A.A.M.</p>
+
+      <div class="tools-row reveal">
+        <span class="tool-chip">Sistema ERP</span>
+        <span class="tool-chip">PayU / PayPal</span>
+        <span class="tool-chip">Meta Ads Manager</span>
+        <span class="tool-chip">Google Ads</span>
+        <span class="tool-chip">Mailchimp / Brevo</span>
+        <span class="tool-chip">HubSpot / Zoho CRM</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BENEFICIOS ================= -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Beneficios e impacto</p>
+        <h2>Para quién crea valor S.A.A.M.</h2>
+      </div>
+      <div class="benef-grid reveal">
+        <div class="benef-card">
+          <p class="eyebrow">Clientes</p>
+          <p>Acceso a tendencias globales y exclusividad, con respaldo de productos 100% auténticos que eliminan el riesgo de falsificaciones del mercado informal.</p>
+        </div>
+        <div class="benef-card">
+          <p class="eyebrow">Empresa</p>
+          <p>Diversificación de canales de venta, posicionamiento como importadora confiable y rentabilidad sostenida por la reinversión de utilidades.</p>
+        </div>
+        <div class="benef-card">
+          <p class="eyebrow">Comunidad</p>
+          <p>Generación de empleo, fortalecimiento de cadenas de suministro y dinamización del comercio nacional e internacional.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= VIABILIDAD ================= -->
+  <section class="section" id="viabilidad" style="background:var(--paper-50);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Viabilidad</p>
+        <h2>Una base financiera sólida</h2>
+      </div>
+      <div class="via-grid reveal">
+        <div>
+          <p class="big-figure">$86.000.000<sup>COP</sup></p>
+          <p class="via-note">Inversión inicial estimada, destinada al registro legal, adecuación del local, compra de inventario, plataforma de comercio electrónico, equipos tecnológicos y capital de trabajo.</p>
+        </div>
+        <div>
+          <p class="eyebrow" style="margin-bottom:16px;">Fuentes de financiación</p>
+          <ul class="fund-list">
+            <li><span class="tag">01</span> Aportes de los socios fundadores.</li>
+            <li><span class="tag">02</span> Créditos para emprendimientos de entidades bancarias.</li>
+            <li><span class="tag">03</span> Fondo Emprender del SENA y Cámara de Comercio.</li>
+            <li><span class="tag">04</span> Inversionistas privados en comercio internacional.</li>
+            <li><span class="tag">05</span> Reinversión de utilidades de los primeros años.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RESULTADOS / ANTES-DESPUÉS ================= -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Resultados esperados</p>
+        <h2>Antes y después de S.A.A.M.</h2>
+      </div>
+      <div class="compare reveal">
+        <div class="col before">
+          <span class="label">Antes</span>
+          <p>Los consumidores colombianos enfrentaban dificultades para acceder a productos internacionales originales, de calidad y a precios competitivos, por la oferta limitada, las imitaciones y los altos costos de importación individual.</p>
+        </div>
+        <div class="col after">
+          <span class="label">Con S.A.A.M.</span>
+          <p>Los consumidores acceden a productos internacionales originales de moda, calzado, cosméticos y accesorios mediante un modelo híbrido, con garantía de autenticidad y una experiencia de compra moderna y segura.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA FINAL ================= -->
+  <section class="section">
+    <div class="wrap">
+      <div class="cta-final reveal">
+        <p class="eyebrow" style="justify-content:center; color:var(--brass-300);">Conclusión y proyección</p>
+        <h2>Invitamos a aliados e inversionistas a cruzar el puente con nosotros</h2>
+        <p>S.A.A.M. proyecta avanzar en su constitución legal formal, el desarrollo de su plataforma digital y el cierre de alianzas internacionales, consolidándose como empresa líder en distribución de productos internacionales en Latinoamérica para 2030.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#contacto">Hablemos del proyecto</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contacto">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="brand-line"><span class="mark" style="width:26px;height:26px;font-size:12px;">S</span>S.A.A.M.</div>
+        <p>Sociedad dedicada a la importación, distribución y comercialización de productos internacionales. Proyecto empresarial y tecnológico — Grado 11°, Técnicos en Sistemas.</p>
+      </div>
+      <div>
+        <h3>Equipo</h3>
+        <ul>
+          <li>Carlos Andrés Ochoa Camargo</li>
+          <li>Stefany Plata Barrera</li>
+          <li>Adrián Felipe González Plazas</li>
+          <li>María Del Mar Hernández Cardozo</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Proyecto</h3>
+        <ul>
+          <li>Docente orientadora: Johana Higuera Landaeta</li>
+          <li>Modalidad: Técnicos en Sistemas</li>
+          <li>Sector: Comercial / Comercio</li>
+          <li>Octubre de 2030</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom-row">
+      <span>© 2030 S.A.A.M. Importer — proyecto académico.</span>
+      <span>Un puente entre el mundo y cada hogar.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Progressive enhancement: content is fully visible without JS.
+  // Only when JS runs do we opt elements into the reveal animation.
+  const revealEls = document.querySelectorAll('.reveal');
+  revealEls.forEach(el => el.classList.add('js-reveal'));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
